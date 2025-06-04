@@ -1,19 +1,26 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {Atomo3D} from'../components/Atomo3D';
+import { Atomo3D } from '../components/Atomo3D';
+import { useState } from 'react';
+
 const PantallaInicio = () => {
   const navigate = useNavigate();
+  const [archivo, setArchivo] = useState(null);
+  const [formato, setFormato] = useState('FASTA');
+
+  const handleArchivoChange = (e) => {
+    setArchivo(e.target.files[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (archivo) {
+      navigate('/dashboard');
+    }
+  };
 
   return (
     <div className="pantalla-inicio">
-      {/* <motion.div
-        className="logo"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 100 }}
-      >
-        ADN
-      </motion.div> */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -22,6 +29,7 @@ const PantallaInicio = () => {
       >
         <Atomo3D />
       </motion.div>
+      
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -38,23 +46,44 @@ const PantallaInicio = () => {
       >
         Esta aplicación te ayudará a analizar y entender datos genéticos de manera eficiente y visual.
       </motion.p>
-      <motion.ul
-        className="caracteristicas"
+
+      <motion.div
+        className="evaluacion-form"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
       >
-        <li>🔬 Análisis genético avanzado</li>
-        <li>📊 Visualizaciones interactivas</li>
-      </motion.ul>
+        <input
+          className="evaluacion-input"
+          type="file"
+          accept=".fasta,.fa,.gb,.gbk,.txt"
+          onChange={handleArchivoChange}
+        />
+        <small className="archivo-info">
+          Archivos permitidos: .fasta, .fa, .gb, .gbk, .txt
+        </small>
 
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => navigate('/evaluacion')}
-      >
-        Iniciar Evaluación
-      </motion.button>
+        <div style={{ marginTop: '1rem' }}>
+          <label style={{ marginRight: '0.5rem', color: '#fff' }}>Formato:</label>
+          <select
+            value={formato}
+            onChange={(e) => setFormato(e.target.value)}
+            className="evaluacion-input"
+          >
+            <option value="FASTA">FASTA</option>
+            <option value="GenBank">GenBank</option>
+          </select>
+        </div>
+
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={handleSubmit}
+          disabled={!archivo}
+        >
+          Ir al Dashboard
+        </motion.button>
+      </motion.div>
 
       <footer className="footer">
         © 2025 BioApp - Todos los derechos reservados
