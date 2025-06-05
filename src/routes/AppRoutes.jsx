@@ -1,16 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
 import PantallaInicio from '../pages/PantallaInicio';
-import Dashboard from '../pages/Dashboard';
-import DetailView from '../pages/DetailView';
+import EvaluacionADN from '../pages/EvaluacionADN';
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<PantallaInicio />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/detail/:sheetId" element={<DetailView />} />
+      <Route path="/evaluacion" element={<EvaluacionADN />} />
     </Routes>
   );
 };
 
 export default AppRoutes;
+
