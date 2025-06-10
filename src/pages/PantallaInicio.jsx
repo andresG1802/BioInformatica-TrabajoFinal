@@ -29,13 +29,13 @@ const PantallaInicio = () => {
       >
         <Atomo3D />
       </motion.div>
-      
+
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        Bienvenido a la App de Bioinformática
+        Analisis de Genoma Bacteriano
       </motion.h1>
 
       <motion.p
@@ -44,7 +44,7 @@ const PantallaInicio = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
-        Esta aplicación te ayudará a analizar y entender datos genéticos de manera eficiente y visual.
+        Esta aplicación te ayudará a analizar varias muestras de adn a la vez
       </motion.p>
 
       <motion.div
@@ -59,20 +59,11 @@ const PantallaInicio = () => {
           accept=".fasta,.fa,.gb,.gbk,.txt"
           onChange={handleArchivoChange}
         />
-        <small className="archivo-info">
-          Archivos permitidos: .fasta, .fa, .gb, .gbk, .txt
-        </small>
 
-        <div style={{ marginTop: '1rem' }}>
-          <label style={{ marginRight: '0.5rem', color: '#fff' }}>Formato:</label>
-          <select
-            value={formato}
-            onChange={(e) => setFormato(e.target.value)}
-            className="evaluacion-input"
-          >
-            <option value="FASTA">FASTA</option>
-            <option value="GenBank">GenBank</option>
-          </select>
+        <div style={{ margin: '1rem' }}>
+          <small className="archivo-info">
+            Archivos permitidos: .fasta, .fa, .gb, .gbk, .txt
+          </small>
         </div>
 
         <motion.button
@@ -81,7 +72,7 @@ const PantallaInicio = () => {
           onClick={handleSubmit}
           disabled={!archivo}
         >
-          Ir al Dashboard
+          Analizar Archivos
         </motion.button>
       </motion.div>
 
