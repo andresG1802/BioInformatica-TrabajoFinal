@@ -41,14 +41,30 @@ export default function Dashboard() {
           height="180px"
           position={{ x: '20px', y: '20px' }}
         >
-          <h3>Sample Data</h3>
-          <p>This is a sample data card that can contain any content</p>
+          <h3>Esta carta debe mostrar las sustituciones</h3>
+          <p>Sustitucion en:</p>
+        </DataCard>
+        <DataCard
+          width="250px"
+          height="180px"
+          position={{ x: '320px', y: '20px' }}
+        >
+          <h3>Esta carta debe mostrar las eliminaciones</h3>
+          <p>Eliminacion en:</p>
+        </DataCard>
+        <DataCard
+          width="250px"
+          height="180px"
+          position={{ x: '620px', y: '20px' }}
+        >
+          <h3>Esta carta debe mostrar las inserciones</h3>
+          <p>Insercionen:</p>
         </DataCard>
 
         <DataCard
           width="300px"
           height="200px"
-          position={{ x: '290px', y: '20px' }}
+          position={{ x: '20px', y: '240px' }}
         >
           <h3>Statistics</h3>
           <div>
