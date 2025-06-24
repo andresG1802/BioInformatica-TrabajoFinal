@@ -1,0 +1,27 @@
+.historial-container {
+  flex: 1;
+  padding: 2rem;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.historial-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.historial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.historial-card {
+  background: #f8f8ff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  color: #222;
+}

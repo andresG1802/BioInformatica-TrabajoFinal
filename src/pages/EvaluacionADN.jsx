@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/EvaluacionADN.css';
+import Sidebar from '../components/SIdebar';
 
 const cadenas = [
   `AGTCTAGCGAAGTCTAGCCGAAGTCTTAGCCGAAGTCTAGCGGAAGTCTAGCGAAGTCTTAGCCGAAGTCTAGCGGAAGTCTAGCGAAGTCTTAGCCGAAGTCTAGCGGAAGTCTAGCGA`,
@@ -32,8 +33,13 @@ export default function Evaluacion() {
     return `LOCUS       ${nombre}        ${secuencia.length} bp    DNA     linear   UNK\nFEATURES             Location/Qualifiers\n     source          1..${secuencia.length}\n                     /organism="Homo sapiens"\nORIGIN\n${origin}\n//`;
   };
 
-  return (
-    <div className="evaluacion-container">
+ return (
+  <div style={{ display: 'flex' }}>
+    {/* Sidebar a la izquierda */}
+    <Sidebar />
+
+    {/* Contenido principal a la derecha */}
+    <div className="evaluacion-container" style={{ marginLeft: '220px', flexGrow: 1 }}>
       <h1 className="evaluacion-title">Subir Archivo de ADN</h1>
 
       <div className="evaluacion-form">
@@ -87,5 +93,7 @@ export default function Evaluacion() {
         })}
       </div>
     </div>
-  );
+  </div>
+);
+
 }

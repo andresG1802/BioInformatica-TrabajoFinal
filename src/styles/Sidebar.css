@@ -1,0 +1,43 @@
+.sidebar {
+  width: 220px;
+  background-color: #1e1e2f;
+  color: white;
+  height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
+  position: absolute;
+}
+
+.sidebar-logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 8px; /* 👈 aquí el borde redondeado */
+  font-size: 1.1rem;
+}
+
+.sidebar-links li {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.sidebar-links li:hover {
+  background-color: #292945;
+  color: #84b6f4;
+}
