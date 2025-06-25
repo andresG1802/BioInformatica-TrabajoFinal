@@ -14,8 +14,7 @@ export default function Historial() {
   }, []);
 
   return (
-    
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
       <div className="historial-container">
         <h1 className="historial-title">🧬 Historial de Genomas</h1>
 

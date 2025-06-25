@@ -70,7 +70,7 @@ export default function Evaluacion() {
   };
 
  return (
-  <div style={{ display: 'flex' }}>
+  <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
     {/* Sidebar a la izquierda */}
     <Sidebar />
 
@@ -89,7 +89,7 @@ export default function Evaluacion() {
           Archivos permitidos: .fasta, .fa, .gb, .gbk, .txt
         </small>
 
-        <div style={{ marginTop: '1rem' }}>
+        {/* <div style={{ marginTop: '1rem' }}>
           <label style={{ marginRight: '0.5rem' }}>Formato:</label>
           <select
             value={formato}
@@ -99,7 +99,7 @@ export default function Evaluacion() {
             <option value="FASTA">FASTA</option>
             <option value="GenBank">GenBank</option>
           </select>
-        </div>
+        </div> */}
 
         <button className="evaluacion-button" onClick={handleComparar}>
           {loading ? "Comparando..." : "Comparar"}

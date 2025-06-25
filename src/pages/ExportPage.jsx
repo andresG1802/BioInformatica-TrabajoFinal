@@ -1,28 +1,36 @@
 // src/pages/ExportPage.jsx
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import "../styles/ExportPage.css";
 import Sidebar from "../components/SIdebar";
 
 export default function ExportPage() {
-  const [link, setLink] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = React.useState(null);
 
   const handleExport = async () => {
-    setStatus("Generando Excel...");
+    setStatus("Generando CSV...");
+
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/ecoli/export/xlsx");
-      const data = await res.json();
-      if (data.ruta) {
-        const downloadLink = `http://127.0.0.1:5000/${data.ruta}`;
-        setLink(downloadLink);
-        setStatus("Archivo listo para descargar");
-      } else {
-        setStatus("No se pudo generar el archivo.");
+      const res = await fetch("http://127.0.0.1:5000/api/ecoli/history/csv");
+
+      if (!res.ok) {
+        setStatus("No se pudo generar el CSV.");
+        return;
       }
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "ecoli_history.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setStatus("✅ CSV descargado correctamente.");
     } catch (err) {
-      setStatus("Error al exportar.");
-      console.error(err);
+      console.error("Error al exportar:", err);
+      setStatus("❌ Error al exportar.");
     }
   };
 
@@ -36,31 +44,17 @@ export default function ExportPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <h1>Exportar Genomas a Excel</h1>
+        <h1>Exportar Genomas a CSV</h1>
 
         <motion.button
           whileHover={{ scale: 1.05 }}
           className="export-button"
           onClick={handleExport}
         >
-          Generar Excel
+          Descargar CSV
         </motion.button>
 
         {status && <p>{status}</p>}
-
-        {link && (
-          <motion.a
-            href={link}
-            className="download-link"
-            download
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-          >
-            Descargar Excel
-          </motion.a>
-        )}
       </motion.div>
     </div>
   );

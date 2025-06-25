@@ -3,9 +3,14 @@
   flex-direction: column;
   align-items: center;
   padding: 3rem 2rem;
-  min-height: 100vh;
   background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  flex-grow: 1;
+  overflow-y: auto;   /* <- aquí está la magia */
+  height: 100vh;
+  box-sizing: border-box;
 }
+
 
 .evaluacion-title {
   font-size: 2rem;

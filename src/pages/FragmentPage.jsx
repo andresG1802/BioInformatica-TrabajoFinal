@@ -49,7 +49,7 @@ export default function FragmentPage() {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
       <SideBarRightHistorial />
 
       <motion.div

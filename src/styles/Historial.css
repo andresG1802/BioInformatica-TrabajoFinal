@@ -3,7 +3,8 @@
   padding: 2rem;
   background: linear-gradient(to right, #6a11cb, #2575fc);
   color: white;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
   box-sizing: border-box;
 }
 
@@ -24,4 +25,12 @@
   padding: 1rem;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   color: #222;
+}
+
+.historial-card h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
