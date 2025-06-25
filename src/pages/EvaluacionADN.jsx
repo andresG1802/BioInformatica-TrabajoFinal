@@ -130,7 +130,7 @@ export default function Evaluacion() {
               </motion.div>
             ))
           : cadenas.map((cadena, index) => {
-              const nombre = `Cadena_${index + 1}`;
+              const nombre = `Genoma_${index + 1}`;
               const secuenciaLarga = cadena.repeat(10);
               const textoFormateado =
                 formato === "FASTA"
