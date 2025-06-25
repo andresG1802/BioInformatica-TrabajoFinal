@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "../styles/FragmentPage.css";
+import SideBarRightHistorial from "../components/SideBarRightHistorial";
 
 export default function FragmentPage() {
   const [files, setFiles] = useState([]);
@@ -48,49 +49,54 @@ export default function FragmentPage() {
   };
 
   return (
-    <motion.div
-      className="fragment-container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      <h1>Visualizar Fragmento Genómico</h1>
+    <div style={{ display: "flex" }}>
+      <SideBarRightHistorial />
 
-      <div className="form">
-        <label>Archivo genómico:</label>
-        <select value={selectedFile} onChange={(e) => setSelectedFile(e.target.value)}>
-          <option value="">-- Selecciona un archivo --</option>
-          {files.map((f, idx) => (
-            <option key={idx} value={f}>{f}</option>
-          ))}
-        </select>
+      <motion.div
+        className="fragment-container"
+        style={{ marginLeft: "220px", flexGrow: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <h1>Visualizar Fragmento Genómico</h1>
 
-        <label>Posición inicial:</label>
-        <input type="number" value={start} onChange={(e) => setStart(e.target.value)} />
+        <div className="form">
+          <label>Archivo genómico:</label>
+          <select value={selectedFile} onChange={(e) => setSelectedFile(e.target.value)}>
+            <option value="">-- Selecciona un archivo --</option>
+            {files.map((f, idx) => (
+              <option key={idx} value={f}>{f}</option>
+            ))}
+          </select>
 
-        <label>Posición final:</label>
-        <input type="number" value={end} onChange={(e) => setEnd(e.target.value)} />
+          <label>Posición inicial:</label>
+          <input type="number" value={start} onChange={(e) => setStart(e.target.value)} />
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          className="btn-submit"
-          onClick={handleSubmit}
-        >
-          Obtener Fragmento
-        </motion.button>
-      </div>
+          <label>Posición final:</label>
+          <input type="number" value={end} onChange={(e) => setEnd(e.target.value)} />
 
-      {error && <p className="error-msg">❌ {error}</p>}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            className="btn-submit"
+            onClick={handleSubmit}
+          >
+            Obtener Fragmento
+          </motion.button>
+        </div>
 
-      {fragment && (
-        <motion.div
-          className="fragment-output"
-          initial={{ y: 10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-        >
-          <h3>Fragmento:</h3>
-          <pre>{fragment}</pre>
-        </motion.div>
-      )}
-    </motion.div>
+        {error && <p className="error-msg">❌ {error}</p>}
+
+        {fragment && (
+          <motion.div
+            className="fragment-output"
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+          >
+            <h3>Fragmento:</h3>
+            <pre>{fragment}</pre>
+          </motion.div>
+        )}
+      </motion.div>
+    </div>
   );
 }

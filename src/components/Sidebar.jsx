@@ -7,6 +7,15 @@ import '../styles/Sidebar.css';
 const Sidebar = () => {
   const navigate = useNavigate();
 
+  const menuItems = [
+    { label: 'Inicio', route: '/' },
+    { label: 'Evaluación', route: '/evaluacion' },
+    { label: 'Historial', route: '/historial' },
+    { label: 'Estadísticas', route: '/ecoli/stats' },
+    { label: 'Ver Fragmento', route: '/ecoli/fragment' },
+    { label: 'Exportar a Excel', route: '/ecoli/export' },
+  ];
+
   return (
     <motion.div
       className="sidebar"
@@ -16,27 +25,16 @@ const Sidebar = () => {
     >
       <div className="sidebar-logo">🧬 EcoliTool</div>
       <ul className="sidebar-links">
-        <motion.li
-          whileHover={{ backgroundColor: '#292945', color: '#84b6f4', borderRadius: '8px' }}
-          onClick={() => navigate('/')}
-          style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}
-        >
-          Inicio
-        </motion.li>
-        <motion.li
-          whileHover={{ backgroundColor: '#292945', color: '#84b6f4', borderRadius: '8px' }}
-          onClick={() => navigate('/evaluacion')}
-          style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}
-        >
-          Evaluación
-        </motion.li>
-        <motion.li
-          whileHover={{ backgroundColor: '#292945', color: '#84b6f4', borderRadius: '8px' }}
-          onClick={() => navigate('/historial')}
-          style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}
-        >
-          Historial
-        </motion.li>
+        {menuItems.map((item, index) => (
+          <motion.li
+            key={index}
+            whileHover={{ backgroundColor: '#292945', color: '#84b6f4', borderRadius: '8px' }}
+            onClick={() => navigate(item.route)}
+            style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}
+          >
+            {item.label}
+          </motion.li>
+        ))}
       </ul>
     </motion.div>
   );

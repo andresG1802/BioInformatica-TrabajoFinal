@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import "../styles/ExportPage.css";
+import Sidebar from "../components/SIdebar";
 
 export default function ExportPage() {
   const [link, setLink] = useState(null);
@@ -26,36 +27,41 @@ export default function ExportPage() {
   };
 
   return (
-    <motion.div
-      className="export-container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      <h1>Exportar Genomas a Excel</h1>
+    <div style={{ display: "flex" }}>
+      <Sidebar />
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        className="export-button"
-        onClick={handleExport}
+      <motion.div
+        className="export-container"
+        style={{ marginLeft: "220px", flexGrow: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
       >
-        Generar Excel
-      </motion.button>
+        <h1>Exportar Genomas a Excel</h1>
 
-      {status && <p>{status}</p>}
-
-      {link && (
-        <motion.a
-          href={link}
-          className="download-link"
-          download
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={{ y: 10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          className="export-button"
+          onClick={handleExport}
         >
-          Descargar Excel
-        </motion.a>
-      )}
-    </motion.div>
+          Generar Excel
+        </motion.button>
+
+        {status && <p>{status}</p>}
+
+        {link && (
+          <motion.a
+            href={link}
+            className="download-link"
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+          >
+            Descargar Excel
+          </motion.a>
+        )}
+      </motion.div>
+    </div>
   );
 }
