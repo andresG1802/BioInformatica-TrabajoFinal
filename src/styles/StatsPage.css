@@ -1,0 +1,31 @@
+/* src/pages/StatsPage.css */
+.stats-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: #eaf4fc;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h4 {
+  margin-bottom: 0.5rem;
+  color: #1976d2;
+}

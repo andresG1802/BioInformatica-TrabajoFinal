@@ -11,6 +11,42 @@ const cadenas = [
 export default function Evaluacion() {
   const [archivo, setArchivo] = useState(null);
   const [formato, setFormato] = useState('FASTA');
+  const [resultado, setResultado] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const handleComparar = async () => {
+  if (!archivo) {
+    alert("Por favor, selecciona un archivo primero.");
+    return;
+  }
+
+  setLoading(true);
+  setResultado(null);
+
+  try {
+    // 1. Subir archivo
+    const formData = new FormData();
+    formData.append("file", archivo);
+
+    const resUpload = await fetch("http://127.0.0.1:5000/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!resUpload.ok) throw new Error("Error al subir archivo");
+
+    // 2. Comparar con E. coli
+    const resCompare = await fetch("http://127.0.0.1:5000/api/compare-to-ecoli");
+    const data = await resCompare.json();
+    setResultado(data.comparaciones || []);
+  } catch (error) {
+    console.error("Error en comparación:", error);
+    alert("Ocurrió un error al comparar.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   const handleArchivoChange = (e) => {
     setArchivo(e.target.files[0]);
@@ -65,32 +101,57 @@ export default function Evaluacion() {
           </select>
         </div>
 
-        <button className="evaluacion-button">Comparar</button>
+        <button className="evaluacion-button" onClick={handleComparar}>
+          {loading ? "Comparando..." : "Comparar"}
+        </button>
       </div>
 
       <div className="adn-grid">
-        {cadenas.map((cadena, index) => {
-          const nombre = `Cadena_${index + 1}`;
-          const secuenciaLarga = cadena.repeat(10); // simula cadena larga
-          const textoFormateado =
-            formato === 'FASTA'
-              ? formatearFASTA(nombre, secuenciaLarga)
-              : formatearGenBank(nombre, secuenciaLarga);
+        {resultado
+          ? resultado.map((res, index) => (
+              <motion.div
+                key={index}
+                className="adn-card"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <h4>{res.archivo_ecoli}</h4>
+                {res.error ? (
+                  <p className="error">{res.error}</p>
+                ) : (
+                  <>
+                    <p><strong>ID:</strong> {res.id_ecoli}</p>
+                    <p><strong>Longitud Query:</strong> {res.longitud_query}</p>
+                    <p><strong>Longitud E.coli:</strong> {res.longitud_ecoli}</p>
+                    <p><strong>Porcentaje identidad:</strong> {res.porcentaje_identidad}%</p>
+                  </>
+                )}
+              </motion.div>
+            ))
+          : cadenas.map((cadena, index) => {
+              const nombre = `Cadena_${index + 1}`;
+              const secuenciaLarga = cadena.repeat(10);
+              const textoFormateado =
+                formato === "FASTA"
+                  ? formatearFASTA(nombre, secuenciaLarga)
+                  : formatearGenBank(nombre, secuenciaLarga);
 
-          return (
-            <motion.div
-              key={index}
-              className="adn-card"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6, type: 'spring' }}
-            >
-              <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'Courier New, monospace', fontSize: '0.8rem' }}>
-                {textoFormateado}
-              </pre>
-            </motion.div>
-          );
-        })}
+              return (
+                <motion.div
+                  key={index}
+                  className="adn-card"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                >
+                  <pre style={{ whiteSpace: "pre-wrap", fontFamily: "Courier New, monospace", fontSize: "0.8rem" }}>
+                    {textoFormateado}
+                  </pre>
+                </motion.div>
+              );
+            })}
+
       </div>
     </div>
   </div>

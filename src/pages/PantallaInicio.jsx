@@ -27,7 +27,7 @@ const PantallaInicio = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        Bienvenido a la App de Bioinformática
+        EcoliApp
       </motion.h1>
 
       <motion.p

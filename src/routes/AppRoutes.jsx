@@ -9,6 +9,10 @@ const AppRoutes = () => {
       <Route path="/" element={<PantallaInicio />} />
       <Route path="/evaluacion" element={<EvaluacionADN />} />
       <Route path="/historial" element={<Historial />} />
+      <Route path="/ecoli/stats" element={<StatsPage />} />
+      <Route path="/history" element={<HistoryPage />} />
+      <Route path="/ecoli/export" element={<ExportPage />} />
+      <Route path="/ecoli/fragment" element={<FragmentPage />} />
     </Routes>
   );
 };
